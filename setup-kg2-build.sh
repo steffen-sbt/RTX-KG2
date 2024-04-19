@@ -166,6 +166,8 @@ EOF
     sudo apt-get update
     sudo apt-get upgrade -y
     sudo apt-get -y --fix-missing install postgresql
+
+    /etc/init.d/postgresql start
     
     # Addresses permission issues
     # https://stackoverflow.com/questions/38470952/postgres-can-not-change-directory-in-ubuntu-14-04
