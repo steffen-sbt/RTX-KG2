@@ -60,14 +60,15 @@ fi
 
 ## install the Linux distro packages that we need (python3-minimal is for docker installations)
 sudo apt-get update
+sudo apt-get upgrade -y
 
 ## handle weird tzdata install (this makes UTC the timezone)
-sudo DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata
+sudo DEBIAN_FRONTEND=noninteractive apt-get install --fix-missing -y tzdata
 
 # install various other packages used by the build system
 #  - curl is generally used for HTTP downloads
 #  - wget is used by the neo4j installation script (some special "--no-check-certificate" mode)
-sudo apt-get install -y \
+sudo apt-get install --fix-missing -y \
      default-jre \
      awscli \
      zip \
@@ -163,8 +164,8 @@ EOF
     sudo sh -c 'echo "deb http://apt-archive.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
     wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
     sudo apt-get update
-    sudo apt-get upgrade
-    sudo apt-get -y install postgresql
+    sudo apt-get upgrade -y
+    sudo apt-get -y --fix-missing install postgresql
     
     # Addresses permission issues
     # https://stackoverflow.com/questions/38470952/postgres-can-not-change-directory-in-ubuntu-14-04
